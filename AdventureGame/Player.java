@@ -1,0 +1,140 @@
+import java.util.Scanner;
+
+public class Player {
+    private int damage;
+    private int health;
+    private int orijinalHealth;
+    private int money;
+    private String name;
+    private String charName;
+    private Scanner input = new Scanner(System.in);
+    private Inventory inventory;
+
+    public Player(String name) {
+        this.name = name;
+        this.inventory = new Inventory();
+    }
+
+    public void selectChar(){
+        Samurai samurai = new Samurai();
+        Archer archer = new Archer();
+        Knight knight = new Knight();
+
+        GameChar[] charlist = {new Samurai(), new Archer(), new Knight()};
+        System.out.println("-----------------------------------");
+        System.out.println("karakterler");
+        System.out.println("-----------------------------------");
+
+        for(GameChar gameChar : charlist){
+            System.out.println("ID : " + gameChar.getId() +"\t\t"+
+                    "karakter : " + gameChar.getName() +"\t\t"+
+                    "hasar : " + gameChar.getDamage() +"\t\t"+
+                    "sağlık : " + gameChar.getHealth() +"\t\t"+
+                    "para : " + gameChar.getMoney());
+        }
+        System.out.println("--------------------------------");
+        System.out.print("lütfen bir karakter id giriniz : ");
+        int selectChar = input.nextInt();
+
+        while(selectChar < 1 || selectChar > 3){
+            System.out.print("geçersiz değer. lütfen tekrar giriniz : ");
+            selectChar = input.nextInt();
+        }
+        switch (selectChar){
+            case 1:
+                initPlayer(new Samurai());
+                break;
+            case 2:
+                initPlayer(new Archer());
+                break;
+            case 3:
+                initPlayer(new Knight());
+                break;
+        }
+        System.out.println("karakter : " + this.getCharName() +"\t"+
+                ", hasar : " + this.getDamage() +"\t"+
+                ", sağlık : " + this.getHealth() +"\t"+
+                ", para : " + this.getMoney());
+    }
+
+    public void initPlayer(GameChar gameChar){
+        this.setDamage(gameChar.getDamage());
+        this.setHealth(gameChar.getHealth());
+        this.setOrijinalHealth(gameChar.getHealth());
+        this.setMoney(gameChar.getMoney());
+        this.setCharName(gameChar.getName());
+    }
+
+    public void printInfo(){
+        System.out.println(
+                "silahınız : " + this.getInventory().getWeapon().getName() +"\t"+
+                        ", zırhınız : " + this.getInventory().getArmor().getName() +"\t"+
+                        ", bloklama : " + this.getInventory().getArmor().getBlock() + "\t"+
+                        ", hasarınız : " + this.getTotalDamage() +"\t"+
+                        ", sağlığınız : " + this.getHealth() +"\t"+
+                        ", paranız : " + this.getMoney());
+    }
+
+    public int getTotalDamage(){
+        return damage + this.getInventory().getWeapon().getDamage();
+    }
+
+    public int getDamage() {
+        return damage;
+    }
+
+    public void setDamage(int damage) {
+        this.damage = damage;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        if(health < 0) {
+            health = 0;
+        }
+        this.health = health;
+    }
+
+    public int getMoney() {
+        return money;
+    }
+
+    public void setMoney(int money) {
+        this.money = money;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCharName() {
+        return charName;
+    }
+
+    public void setCharName(String charName) {
+        this.charName = charName;
+    }
+
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
+    }
+
+    public int getOrijinalHealth() {
+        return orijinalHealth;
+    }
+
+    public void setOrijinalHealth(int orijinalHealth) {
+        this.orijinalHealth = orijinalHealth;
+    }
+}
