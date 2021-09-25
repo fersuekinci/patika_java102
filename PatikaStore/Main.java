@@ -1,30 +1,3 @@
-    public static int List<Product> add() {
-        Scanner input = new Scanner(System.in);
-
-        System.out.println();
-
-        System.out.print("ürün adı : ");
-        String pName = input.next();
-        System.out.println();
-
-        System.out.print("fiyat : ");
-        double price = input.nextDouble();
-        System.out.println();
-
-        int i = 1;
-        for (Brand brand : Brand.brands()) {
-            System.out.println(i + " - " + brand.getName());
-            i++;
-        }
-        System.out.println();
-
-        System.out.print("marka : ");
-        int brandid = input.nextInt();
-        System.out.println();
-        
-    }
-
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
